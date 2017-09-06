@@ -1,0 +1,17 @@
+#searchBar {
+  margin: 15px 10px;
+}
+
+.tableWrapper {
+  max-height: 400px;
+  overflow: auto;
+  background: #b3ecff;
+}
+
+.AddParams h5{
+	font-size: 18px;
+}
+
+.AddParams .in{
+	background: #e6f9ff;
+}

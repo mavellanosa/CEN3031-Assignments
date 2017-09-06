@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body ng-app="directoryApp">
+    <div class="container">
+      <div class="row">
+        <h1>UF Directory App</h1>
+      </div>
+      <div class="row" ng-controller="ListingsController">
+        <div class="col-md-6">
+          <div class="input-group" id="searchBar">
+            <!-- 
+
+                Implement a way to filter through listings using the search bar 
+
+              -->
+            <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
+            <input type="text" class="form-control" placeholder="Search">
+          </div>
+          <div class="tableWrapper">
+            <table class="table table-striped table-hover">
+              <tr>
+                <th>Code</th>
+                <th>Building Name</th>
+                <th></th>
+              </tr>
+
+              <!--
+                  The following code accesses the listings array from app.js and adds each entry as table data <td>
+
+                  Clicking on a row calls the showDetails() function from the controller, which should update variables that will be displayed under the Detailed Information header.
+
+                  The Delete button calls the deleteListing() function from the controller, which should delete the entry.
+              -->
+              <tr ng-repeat="listing in listings" ng-click="showDetails($index)">
+                <td>{{listing.code}}</td>
+                <td>{{listing.name}}</td>
+                <td><button ng-click="deleteListing($index)">Delete</button></td>
+              </tr>
+              <!-- 
+
+                  Fill in the rest of the table:
+                      * populate the rows with the code and name of each listing
+                      * include a way to remove individual listings
+
+                --> 
+            </table>
+          </div>
+
+          <!--
+            HTML form to add new listings
+
+            Takes in text inputs and uses $scope.format from the Controller as a model.
+            When the "Create an Entry" button is clicked, the addListing() function is called, and a listing with the inputs is added to the listings array.
+          -->
+          
+          <form class="AddParams">
+            <button ng-click="addListing()">Create an Entry</button>
+            <h5 class="inputHeaders">Code <input class="in" type="text" ng-model="format.code" placeholder="Code"></h5>
+            
+            <h5 class="inputHeaders">Name<input class="in" type="text" ng-model="format.name" placeholder="Name"></h5>
+            
+            <h5 class="inputHeaders">Longitude<input class="in" type="text" ng-model="format.coordinates.longitude" placeholder="Longitude"></h5>
+            
+            <h5 class="inputHeaders">Latitude<input class="in" type="text" ng-model="format.coordinates.latitude" placeholder="Latitude"></h5>
+            
+            <h5 class="inputHeaders">Address<input class="in" type="text" ng-model="format.address" placeholder="Address"></h5>
+            
+          </form>
+          <!-- 
+
+              Write an HTML form that adds new listings to the directory 
+
+            -->
+        </div>
+        <div class="col-md-6">
+          <div class="jumbotron">
+            <h2>Detailed Information</h2>
+
+            <!--
+              The following displays the address, longitude, and latitude of the currently clicked listing by having an ng-click directive call the showDetails(index) function in the controller to update variables.
+            -->
+            <p>{{"Address: " + addr }}</p>
+            <p>{{"Longitude: " + coordinates.longitude}}</p>
+            <p>{{"Latitude: " + coordinates.latitude}}</p>
+
+
+            <!-- 
+
+              Include a way to display detailed information about an individual listing:
+                   * consider how to use ng-click within the the table to implement this feature
+
+             -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+
+    <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <script src="app.js"></script>
+    <script src="listingController.js"></script>
+    <script src="listingFactory.js"></script>
+  </body>
+</html>
